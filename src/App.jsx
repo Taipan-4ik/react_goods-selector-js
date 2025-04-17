@@ -15,21 +15,26 @@ export const goods = [
   'Garlic',
 ];
 
+export const goodsList = goods.map((good, index) => ({
+  title: good,
+  id: index,
+}));
+
 export const App = () => {
   const defaultGood = goods.find(good => good === 'Jam');
-  const [value, setGood] = useState(defaultGood);
+  const [selectedGood, selectGood] = useState(defaultGood);
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {value ? (
+        {selectedGood ? (
           <>
-            {value} is selected
+            {selectedGood} is selected
             <button
               data-cy="ClearButton"
               type="button"
               className="delete ml-3"
-              onClick={() => setGood(null)}
+              onClick={() => selectGood(null)}
             />
           </>
         ) : (
@@ -39,13 +44,13 @@ export const App = () => {
 
       <table className="table">
         <tbody>
-          {goods.map(good => {
-            const isSelected = good === value;
+          {goodsList.map(good => {
+            const isSelected = good.title === selectedGood;
 
             return (
               <tr
                 data-cy="Good"
-                key={good}
+                key={good.id}
                 className={isSelected ? 'has-background-success-light' : ''}
               >
                 <td>
@@ -54,7 +59,7 @@ export const App = () => {
                     type="button"
                     className={`button ${isSelected ? 'is-info' : ''}`}
                     onClick={() => {
-                      setGood(isSelected ? null : good);
+                      selectGood(isSelected ? null : good.title);
                     }}
                   >
                     {isSelected ? '-' : '+'}
@@ -62,7 +67,7 @@ export const App = () => {
                 </td>
 
                 <td data-cy="GoodTitle" className="is-vcentered">
-                  {good}
+                  {good.title}
                 </td>
               </tr>
             );
