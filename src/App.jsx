@@ -15,9 +15,9 @@ export const goods = [
   'Garlic',
 ];
 
-export const goodsList = goods.map((good, index) => ({
+export const goodsList = goods.map(good => ({
   title: good,
-  id: index,
+  id: crypto.randomUUID,
 }));
 
 export const App = () => {
