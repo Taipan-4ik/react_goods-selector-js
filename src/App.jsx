@@ -65,7 +65,6 @@ export const App = () => {
                     {isSelected ? '-' : '+'}
                   </button>
                 </td>
-
                 <td data-cy="GoodTitle" className="is-vcentered">
                   {good.title}
                 </td>
